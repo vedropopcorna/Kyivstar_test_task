@@ -1,0 +1,8 @@
+.gitignore
+kyivstar/
+.DS_Store
+.idea/
+notebooks/
+.git/
+ml-engineer-assignment.zip
+__MACOSX
