@@ -6,3 +6,6 @@ notebooks/
 .git/
 ml-engineer-assignment.zip
 __MACOSX
+tests/
+bin/
+Description_of_the_Assignment.pdf
