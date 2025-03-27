@@ -42,9 +42,20 @@ I've tested several methodologies:
   This method struggles with consistency because the document contains repetitive terminology across different sections. As a result, KNN clustering often merges semantically related but logically distinct content into a single chunk, reducing precision.
 - agent chunking
   While capable of sophisticated segmentation, this method is prohibitively slow for production use. The processing overhead makes it impractical for real-time applications.
+
+  ### Database configuration and vectorizing
+I've used ChromaDB for storing chunks, their embeddings, and metadata (semantic documents linked to each chunk). For vectorizing, I used the intfloat/multilingual-e5-small model, as it supports the Ukrainian language and performs slightly better than all-MiniLM-L6-v2. Which embedding model works best is a topic for future research.
+  
+  ### LLM for RAG
+  As an LLM, I've used google/gemma-3-4b-it. It supports Ukrainian generative tasks, is open-source, and performs better than the 2B parameter model, but requires significant computational resources.
+
+  ### RAG pipeline
+  This part consists of several steps. Using a system prompt, I set up the model's input by providing the user’s question, relevant context, chat history, and specifying the input language. Then, I created a retriever from the vector_store, compressed and reranked it using rerank-v3.5, and passed it into the QA system. Using the compressor increased generation speed by approximately 30% and improved output precision. However, chat history significantly increases response time. To balance this, I limited the context to four chunks, which also affected answer accuracy. Improving RAG with chat memory is a subject for future research.
   
 
 # Testing & Evaluation
+
+Questions and answers were generated using OpenAI ChatGPT-3.5o. It provides good responses to open-ended questions but loses some details that require larger chunks (e.g., listing countries with roaming access in tariff zones). Additionally, Gemma-3-4b struggles with complex logical questions, such as “In which tariff zones is the cost per MB cheapest?” without chat history. Advanced text preprocessing and improved chunking algorithms could help address these issues.
 
 ## Quality Assessment Metrics
 - **Correct answers Accuracy**: 60%  
