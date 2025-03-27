@@ -11,9 +11,8 @@ import os
 from dotenv import load_dotenv
 from huggingface_hub import login
 import os
-
-login(token=os.getenv("HUGGINGFACE_API_KEY"))
 load_dotenv()
+login(token=os.getenv("HUGGINGFACE_API_KEY"))
 
 
 class LLMFactory:
