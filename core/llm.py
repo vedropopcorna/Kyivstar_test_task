@@ -9,6 +9,10 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.runnables import RunnablePassthrough
 import os
 from dotenv import load_dotenv
+from huggingface_hub import login
+import os
+
+login(token=os.getenv("HUGGINGFACE_API_KEY"))
 load_dotenv()
 
 

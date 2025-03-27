@@ -6,6 +6,7 @@ from langchain_experimental.text_splitter import SemanticChunker
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 # from pdfminer.high_level import extract_text
+from huggingface_hub import login
 import os
 from dotenv import load_dotenv
 
@@ -28,6 +29,8 @@ class TextPreprocessor:
 class DocumentProcessor:
     def __init__(self):
 
+
+        login(token=os.getenv("HUGGINGFACE_API_KEY"))
         self.semantic_splitter = SemanticChunker(
             HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-small")
         )

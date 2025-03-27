@@ -5,5 +5,7 @@ ml-engineer-assignment.zip
 notebooks/
 .DS_Store
 .env
+*.env
+!*.env.example
 Description_of_the_Assignment.pdf
 bin/

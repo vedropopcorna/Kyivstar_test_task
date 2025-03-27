@@ -1,15 +1,24 @@
-version: "3.8"
-
 services:
-  app:
-    container_name: fastapi-app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8030:8030"
+  chatbot:
+    build: .
+    container_name: kyivstar-chatbot
+    env_file:
+      - .env  # Load all variables from .env file
     environment:
-      - PYTHONUNBUFFERED=1
+      - PORT=${PORT:-8030}
+      - HOST=${HOST:-0.0.0.0}
+    ports:
+      - "${PORT:-8030}:${PORT:-8030}"
     volumes:
-      - .:/app
-    restart: unless-stopped
+      - ./storage/chroma_embeddings:/app/storage/chroma_embeddings
+#    healthcheck:
+#      test: ["CMD-SHELL", "curl -f http://localhost:${PORT:-8030}/ || exit 1"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
+#    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
