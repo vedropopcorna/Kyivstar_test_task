@@ -25,6 +25,25 @@ curl -X POST http://localhost:8030/chat \
   -H "Content-Type: application/json" \
   -d '{"input":{"question":"Що таке роумінг?","language":"Ukrainian","session_id":"123"}}'
 
+## Run examples using FastAPI docs
+http://127.0.0.1:8030/docs
+
+## Methodology
+### Cunking
+I've tested several methodologies:
+- character chunking
+  This approach works effectively when combined with overlapping segments. It produces uniform chunks and maintains structural integrity, making it suitable for general document processing.
+- Semantic chunking
+  ![image](https://github.com/user-attachments/assets/0a087712-f744-428b-818c-bfb2ba766e85)
+  Semantic splitting performs well in preserving contextual meaning but tends to generate uneven chunk sizes. To optimize results, the breakpoint percentile threshold can be adjusted to balance granularity and coherence.
+  The best-performing method combines semantic splitting with secondary character-based chunking. It retains contextual relationships (via semantic analysis), ensures consistent chunk lengths (via character splitting), improves retrieval accuracy by preventing information fragmentation.
+
+- KNN chunking
+  This method struggles with consistency because the document contains repetitive terminology across different sections. As a result, KNN clustering often merges semantically related but logically distinct content into a single chunk, reducing precision.
+- agent chunking
+  While capable of sophisticated segmentation, this method is prohibitively slow for production use. The processing overhead makes it impractical for real-time applications.
+  
+
 # Testing & Evaluation
 
 ## Quality Assessment Metrics
