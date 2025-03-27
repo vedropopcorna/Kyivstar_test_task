@@ -33,8 +33,10 @@ http://127.0.0.1:8030/docs
 I've tested several methodologies:
 - character chunking
   This approach works effectively when combined with overlapping segments. It produces uniform chunks and maintains structural integrity, making it suitable for general document processing.
-- Semantic chunking
-  ![image](https://github.com/user-attachments/assets/0a087712-f744-428b-818c-bfb2ba766e85)
+- Semantic splitting \n
+- 
+  ![image](https://github.com/user-attachments/assets/0a087712-f744-428b-818c-bfb2ba766e85) \n
+  
   Semantic splitting performs well in preserving contextual meaning but tends to generate uneven chunk sizes. To optimize results, the breakpoint percentile threshold can be adjusted to balance granularity and coherence.
   The best-performing method combines semantic splitting with secondary character-based chunking. It retains contextual relationships (via semantic analysis), ensures consistent chunk lengths (via character splitting), improves retrieval accuracy by preventing information fragmentation.
 
