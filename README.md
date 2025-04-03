@@ -2,17 +2,23 @@
 
 ## How to start?
 Before starting, edit env. with your API keys:
+
 HUGGINGFACE_API_KEY=your_hf_token
+
 COHERE_API_KEY=your_cohere_key
 
 To build docker image:
+
 docker build -t kyivstar-chatbot .
 
 Run chatbot:
+
 docker run -d -p 8030:8030 --name chatbot --env-file .env kyivstar-chatbot # First start takes 3-4 minutes
 
 Or using docker-compose:
+
 docker-compose build chatbot
+
 docker-compose up -d chatbot
 
 ## Chat Endpoint
