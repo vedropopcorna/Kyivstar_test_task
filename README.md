@@ -9,7 +9,11 @@ To build docker image:
 docker build -t kyivstar-chatbot .
 
 Run chatbot:
-run -d -p 8030:8030 --name chatbot --env-file .env kyivstar-chatbot # First start takes 3-4 minutes
+docker run -d -p 8030:8030 --name chatbot --env-file .env kyivstar-chatbot # First start takes 3-4 minutes
+
+Or using docker-compose:
+docker-compose build chatbot
+docker-compose up -d chatbot
 
 ## Chat Endpoint
 {
